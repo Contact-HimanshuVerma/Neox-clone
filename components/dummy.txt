@@ -1,0 +1,379 @@
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+
+export default function Layout({ children }) {
+  const { pathname } = useRouter();
+  const [navbr, setNavbr] = useState(false);
+  const [view, setView] = useState(false);
+  const changeBackground = () => {
+    if (window.scrollY >= 250) {
+      setNavbr(true);
+    } else {
+      setNavbr(false);
+    }
+  };
+
+  useEffect(() => {
+    changeBackground();
+    window.addEventListener("scroll", changeBackground);
+  });
+  const menu = [
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "About",
+      path: "/about",
+      sub: [
+        { name: "About Neosan ", path: "/about#abttf" },
+
+        { name: "Our Mission", path: "/about#meettheteam" },
+        { name: "Meet the Team", path: "/about#meettheteam" },
+      ],
+    },
+
+    {
+      name: "products",
+      path: "/products",
+      sub: [
+        { name: "Overview ", path: "/products#Overview" },
+
+        {
+          name: "Technology",
+          path: "/products#Technology",
+        },
+        { name: "Benefits", path: "/products#Benefits" },
+      ],
+    },
+
+    {
+      name: "Gallery",
+      path: "/gallery",
+      // sub: [
+      //   { name: "Overview ", path: "/services#AuditingFirms" },
+
+      //   {
+      //     name: "Technology",
+      //     path: "/services#CharteredAccount",
+      //   },
+      //   { name: "Benefits", path: "/services#Corporations" },
+      // ],
+    },
+
+    {
+      name: "Blogs",
+      path: "/blogs",
+      // sub: [
+      //   { name: "Videos", path: "/resources#Videos" },
+      //   { name: "Blogs", path: "/resources#Blogs" },
+      //   { name: "News", path: "/resources#News" },
+      // ],
+    },
+
+    {
+      name: "FAQS",
+      path: "/faq",
+    },
+
+    {
+      name: "Contact",
+      path: "/contact",
+    },
+  ];
+
+  return (
+    <>
+      <Head>
+        <title>{`Neo San Private Limited`}</title>
+      </Head>
+      <div className="w-full lg:h-[82px]">
+        <header
+          className={` ${
+            navbr
+              ? "md:fixed bg-white z-50 w-full border flex justify-center ease-in font-openSans  duration-0 border-zinc-100 border-b"
+              : "w-full  font-openSans bg-glass flex justify-center  ease-in duration-700 "
+          }`}
+        >
+          <div className="lg:basis-[90%] flex z-[20000]   justify-end  items-center text-zinc-900 font-sans">
+            <Link cla href="/">
+              <a className="flex  justify-between   lg:justify-start items-center ">
+                <div className="w-full h-[80px]">
+                  <div className=" md:mt-1 mt-4 relative  w-fit  h-fit md:flex items-center flex-col">
+                    <img
+                      src="/logo.png"
+                      alt="logo"
+                      className="md:w-[109.08px] object-contain  w-[286px] h-[52px] md:h-[72px]"
+                    />
+                  </div>
+                </div>
+              </a>
+            </Link>
+
+            <nav className="text-sm uppercase w-full justify-center font-openSans tracking-tight hidden  lg:flex j flex-1 lg:mr-8">
+              {menu.map(({ name, path, sub }, index) => {
+                if (name === "Discussions") {
+                  return (
+                    <div key={index} className="group relative inline-flex ">
+                      <a
+                        href="https://forum.trueandfair.pro"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        className={`${
+                          pathname === path &&
+                          "underline decoration-blue  decoration-2 font-extrabold underline-offset-4 "
+                        } hover:font-bold mx-3  2xl:mx-4 font-openSans transition-all`}
+                      >
+                        {name}
+                      </a>
+
+                      {sub && (
+                        <div className="bg-transparent w-auto font-openSans absolute top-4 left-0 flex-col z-50 rounded-sm invisible group-hover:visible transition-all">
+                          <div className="pt-4 w-auto">
+                            <div className="w-full shadow-md">
+                              {sub.map(({ name, path }, index) => (
+                                <Link key={index} href={path}>
+                                  <a className="w-56 hover:font-bold   bg-white inline-flex p-2 normal-case text-sm whitespace-nowrap border-b border-t border-zinc-100 hover:bg-">
+                                    {name}
+                                  </a>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div key={index} className="group relative inline-flex ">
+                      <Link href={path}>
+                        <a
+                          className={`${
+                            pathname === path &&
+                            "underline decoration-blue  decoration-2 font-extrabold underline-offset-4 "
+                          } hover:font-bold mx-3  2xl:mx-4 font-openSans transition-all`}
+                        >
+                          <span
+                            className={`${
+                              pathname === path
+                                ? ""
+                                : "bg-left-bottom text-sm font-bah pb-1 bg-gradient-to-r from-blue to-blue bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-700 ease-out"
+                            }`}
+                          >
+                            {name}
+                          </span>
+                        </a>
+                      </Link>
+
+                      {sub && (
+                        <div className="bg-transparent w-auto font-openSans absolute top-4 left-0 flex-col z-50 rounded-sm invisible group-hover:visible transition-all">
+                          <div className="pt-4 w-auto">
+                            <div className="w-full shadow-md">
+                              {sub.map(({ name, path }, index) => (
+                                <Link key={index} href={path}>
+                                  <a className="w-56 hover:font-bold   bg-white inline-flex p-2 normal-case text-sm whitespace-nowrap border-b border-t border-zinc-100 hover:bg-">
+                                    {name}
+                                  </a>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+              })}
+            </nav>
+
+            <nav className=" lg:hidden mr-2 p-2 relative group  flex justify-end ">
+              <svg
+                onClick={() => {
+                  setView((prev) => !prev);
+                }}
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              {view && (
+                <div className="bg-transparent w-auto absolute top-6 -right-2 flex-col z-50 rounded-sm transition-all">
+                  <div className="pt-4 w-auto">
+                    {menu.map(({ name, path, sub }, index) => (
+                      <div
+                        key={index}
+                        tabIndex={1}
+                        className="w-40 group top-4 px-4 bg-white relative inline-flex p-2 normal-case text-sm whitespace-nowrap border-b border-t border-zinc-100 "
+                      >
+                        {sub ? (
+                          name
+                        ) : (
+                          <div
+                            onClick={() => {
+                              setView(false);
+                            }}
+                          >
+                            <Link href={path}>
+                              <a>{name}</a>
+                            </Link>
+                          </div>
+                        )}
+                        <div className="bg-white right-[102%]  group-focus:visible invisible  shadow-md absolute z-[1000] flex flex-col">
+                          {sub?.map(({ name, path }, index) => (
+                            <div
+                              onClick={() => {
+                                setView((prev) => !prev);
+                              }}
+                              key={index}
+                              className="text-center border border-b border-zinc-100 text-sm  px-4 py-2"
+                            >
+                              <Link href={path}>
+                                <div className="">{name}</div>
+                              </Link>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </nav>
+          </div>
+        </header>
+      </div>
+
+      <main
+        className="text-zinc-900 font-sans  "
+        onClick={() => {
+          setView(false);
+        }}
+      >
+        {children}
+      </main>
+
+      <footer className="border font-openSans bg-white border-t mx-auto  py-6 lg:py-7">
+        <div className="grid grid-cols-2 mb-8 lg:flex lg:flex-row justify-around items-start">
+          <div className="col-span-2 pb-4 md:pb-0 ">
+            <Link href="/">
+              <a className="flex flex-col justify-start items-center pl-6 lg:pl-0">
+                <div className=" bg-white">
+                  <img
+                    src="/logo.png"
+                    alt="logo"
+                    className="md:w-[145.79px] object-contain  w-[286px] h-[52px] md:h-[92px]"
+                  />
+                </div>
+                <div className="pl-2 flex flex-col justify-center">
+                  {/* <span className="leading-4 font-openSans text-black text-xl">
+                    
+                  </span> */}
+                </div>
+              </a>
+            </Link>
+          </div>
+
+          <div className="text-sm p-4 lg:p-0 pl-6  text-black font-openSans text-left">
+            {/* <p className="font-semibold">CONTACT</p> */}
+
+            <p>Neo San Private Limited</p>
+            <p>NO 97, 2ND STAGE INDUSTRIAL SUBRB TNMKUR ROAD,</p>
+            <p>BENGALURU, Bengaluru (Bangalore) Urban</p>
+            <p>Karnataka, 560022</p>
+          </div>
+
+          <div className="text-sm p-4 lg:p-0 pl-6  text-black font-openSans text-left">
+            {/* <p className="font-semibold">CONTACT</p> */}
+
+            <p className="">Phone : +919148297040</p>
+            <p className="">Email : info@neosanitation.net</p>
+          </div>
+
+          <div className="text-sm flex flex-col font-openSans text-black  pl-6 lg:p-0   text-left ">
+            <Link href="/about">
+              <a>About</a>
+            </Link>
+            <Link href="/Products">
+              <a>Products</a>
+            </Link>
+            <Link href="/resources">
+              <a> Gallery</a>
+            </Link>
+          </div>
+
+          <div className="text-sm flex flex-col font-openSans text-black lg:p-0  text-left">
+            <Link href="/library">
+              <a>Gallery</a>
+            </Link>
+
+            <Link href="/faq">
+              <a> FAQs</a>
+            </Link>
+            <Link href="/contact">
+              <a>Contact </a>
+            </Link>
+          </div>
+
+          <div className=" md:w-fit w-full  lg:p-0 pl-6 mr-6 mb-2 ">
+            <p className="font-semibold md:mt-0 mt-5 text-sm pb-2 font-openSans  text-black text-center md:text-center">
+              FIND US ON
+            </p>
+            <div className="md:mt-0 mt-5 grid-cols-2 gap-2 flex justify-center lg:inline-grid  ">
+              <a
+                className="hover:scale-105 transition-all"
+                href="/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="/icons/linkidin.gif" className="w-8 h-8" alt="" />
+              </a>
+              <a
+                className="hover:scale-105 transition-all"
+                href="/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="/icons/twitter.gif" className="w-8 h-8" alt="" />
+              </a>
+
+              <a
+                className="hover:scale-105 transition-all"
+                href="/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="/icons/instagram.gif" className="w-8 h-8" alt="" />
+              </a>
+              <a
+                className="hover:scale-105 transition-all"
+                href="/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="/icons/youtube.gif" className="w-8 h-8" alt="" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mx-auto  text-center font-openSans  text-sm text-zinc-400 pt-4 lg:pt-0 lg:p-0 p-4 pl-6">
+          <p> Neo San Private Limited </p>
+          <p>
+            Copyright © 2022. All Rights Reserved. Designed by Deedbee Social
+            Ventures.
+          </p>
+          <p> {`Image credits | freepik.com`}</p>
+        </div>
+      </footer>
+    </>
+  );
+}

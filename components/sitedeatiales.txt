@@ -1,0 +1,13 @@
+main text-2xl
+sub text-
+above and below padding-12
+
+
+
+
+
+
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15548.328810502753!2d77.5303104!3d13.0304371!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d14d261f123%3A0x5da9e4e75f954543!2s560022%2C%20Industrial%20Suburb%202nd%20Stage%2C%20Goraguntepalya%2C%20Yeswanthpur%2C%20Bengaluru%2C%20Karnataka%20560058!5e0!3m2!1sen!2sin!4v1691395268394!5m2!1sen!2sin" 
+
+width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
